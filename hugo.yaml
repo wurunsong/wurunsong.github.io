@@ -11,6 +11,7 @@ summaryLength: 90
 params:
   description: "记录编程学习、项目实践和解决问题的过程。"
   author: "lilac"
+  hideAuthor: true
   mainSections: ["posts"]
   defaultTheme: "light"
   DateFormat: "2006.01.02"
@@ -21,7 +22,6 @@ params:
   ShowPostNavLinks: true
   disableSpecial1stPost: true
   editorial:
-    brand: "lilac."
     github: "https://github.com/wurunsong"
   footer:
     text: "保持好奇，认真记录。"

@@ -6,10 +6,6 @@
     {{- range . }}<span class="publication-date">最新文章 / {{ .Date.Format "2006.01.02" }}</span>{{ end }}
     {{- end }}
   </div>
-  <div class="masthead">
-    <a class="masthead-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }}，首页">{{ site.Params.editorial.brand | default "lilac." }}</a>
-    <div class="masthead-note"><span>一份关于技术的个人刊物</span><span>代码 · 实践 · 思考</span></div>
-  </div>
   <nav class="editorial-nav" aria-label="主导航">
     <ul class="editorial-menu" id="menu">
       {{- range site.Menus.main }}
