@@ -1,0 +1,25 @@
+{{ define "main" }}
+{{- $index := site.Home.OutputFormats.Get "JSON" -}}
+<section class="keyword-search" data-index-url="{{ $index.RelPermalink }}" aria-labelledby="search-title">
+  <header class="search-heading">
+    <h1 id="search-title">{{ .Title }}</h1>
+    <p>搜索文章标题、摘要、标签和正文。</p>
+  </header>
+  <form class="keyword-search-form" role="search">
+    <label for="keyword-input">关键词</label>
+    <div class="search-controls">
+      <input id="keyword-input" name="q" type="search" placeholder="输入关键词，例如 Go、项目" maxlength="120" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-describedby="search-help">
+      <button type="submit">搜索</button>
+    </div>
+    <p id="search-help">忽略英文大小写。多个关键词用空格分开，需同时匹配。</p>
+  </form>
+  <div class="search-feedback">
+    <p id="keyword-status" role="status" aria-live="polite" aria-atomic="true">输入关键词，查找相关文章。</p>
+    <button id="keyword-retry" type="button" hidden>重新加载</button>
+  </div>
+  <div id="keyword-results" aria-label="搜索结果"></div>
+  <noscript><p>请启用 JavaScript 以使用站内搜索。</p></noscript>
+</section>
+{{- $script := resources.Get "js/keyword-search.js" | minify | fingerprint -}}
+<script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous" defer></script>
+{{ end }}

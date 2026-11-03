@@ -1,0 +1,32 @@
+.keyword-search { padding: 36px 0 48px; }
+.search-heading h1 { font: 600 30px/1.45 var(--sans); }
+.search-heading > p { margin-top: 8px; color: var(--secondary); font-size: 14px; line-height: 1.85; }
+.keyword-search-form { margin: 25px 0 0; }
+.keyword-search-form label { display: block; margin-bottom: 8px; font-size: 13px; }
+.search-controls { display: flex; gap: 12px; }
+.search-controls input { width: 100%; min-width: 0; padding: 11px 13px; border: 1px solid var(--border); background: var(--entry); color: var(--primary); font: 16px/1.6 var(--sans); border-radius: 0; }
+.search-controls input::placeholder { color: var(--secondary); }
+.search-controls input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.search-controls button, #keyword-retry { padding: 10px 20px; border: 1px solid var(--accent); background: var(--accent); color: var(--theme); font: 14px/1.6 var(--sans); white-space: nowrap; cursor: pointer; }
+#search-help { margin-top: 9px; color: var(--secondary); font-size: 12px; line-height: 1.8; }
+.search-feedback { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; min-height: 63px; padding: 18px 0; }
+#keyword-status { color: var(--secondary); font-size: 13px; line-height: 1.8; }
+#keyword-retry { padding: 4px 12px; font-size: 12px; }
+#keyword-retry[hidden] { display: none; }
+.keyword-result { padding: 24px 0 26px; border-top: 1px solid var(--border); }
+.keyword-result h2 { font: 600 26px/1.5 var(--serif); overflow-wrap: anywhere; }
+.keyword-result-meta { margin-top: 9px; color: var(--secondary); font-size: 12px; line-height: 1.7; }
+.keyword-result-excerpt { margin-top: 12px; color: var(--content); font: 16px/1.9 var(--sans); overflow-wrap: anywhere; }
+.editorial-menu { column-gap: 24px; }
+@media (max-width: 650px) {
+  .keyword-search { padding-top: 28px; }
+  .search-heading h1 { font-size: 28px; }
+  .editorial-menu { column-gap: 16px; }
+  .search-controls { gap: 9px; }
+  .search-controls button { padding-right: 16px; padding-left: 16px; }
+  .keyword-result h2 { font-size: 24px; }
+}
+@media (max-width: 360px) {
+  .editorial-menu { column-gap: 12px; }
+  .nav-tools { gap: 8px; }
+}

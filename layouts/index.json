@@ -1,0 +1,11 @@
+{{- $index := slice -}}
+{{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections -}}
+{{- range $posts.ByDate.Reverse -}}
+  {{- if not .Params.searchHidden -}}
+    {{- $tags := slice -}}
+    {{- range .GetTerms "tags" -}}{{- $tags = $tags | append .LinkTitle -}}{{- end -}}
+    {{- $summary := (.Description | default .Summary) | plainify | htmlUnescape -}}
+    {{- $index = $index | append (dict "title" .Title "summary" $summary "tags" $tags "content" (.Plain | htmlUnescape) "permalink" .RelPermalink "date" (.Date.Format "2006.01.02")) -}}
+  {{- end -}}
+{{- end -}}
+{{- $index | jsonify -}}
