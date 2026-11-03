@@ -1,7 +1,7 @@
 {{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections -}}
 <header class="editorial-header">
   <div class="masthead-top">
-    <span class="publication-label">A PERSONAL TECH JOURNAL</span>
+    <span class="publication-label">技术手记</span>
     {{- with first 1 $posts.ByDate.Reverse }}
     {{- range . }}<span class="publication-date">最新文章 / {{ .Date.Format "2006.01.02" }}</span>{{ end }}
     {{- end }}
