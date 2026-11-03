@@ -38,12 +38,6 @@ menus:
     - name: "首页"
       url: "/"
       weight: 5
-    - name: "全部文章"
-      url: "/posts/"
-      weight: 10
-    - name: "标签"
-      url: "/tags/"
-      weight: 20
     - name: "搜索"
       url: "/search/"
       weight: 30
