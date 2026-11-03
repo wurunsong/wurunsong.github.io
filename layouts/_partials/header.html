@@ -1,0 +1,31 @@
+{{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections -}}
+<header class="editorial-header">
+  <div class="masthead-top">
+    <span class="publication-label">A PERSONAL TECH JOURNAL</span>
+    {{- with first 1 $posts.ByDate.Reverse }}
+    {{- range . }}<span class="publication-date">最新文章 / {{ .Date.Format "2006.01.02" }}</span>{{ end }}
+    {{- end }}
+  </div>
+  <div class="masthead">
+    <a class="masthead-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }}，首页">{{ site.Params.editorial.brand | default "lilac." }}</a>
+    <div class="masthead-note"><span>一份关于技术的个人刊物</span><span>代码 · 实践 · 思考</span></div>
+  </div>
+  <nav class="editorial-nav" aria-label="主导航">
+    <ul class="editorial-menu" id="menu">
+      {{- range site.Menus.main }}
+      {{- $url := .URL | relLangURL }}
+      {{- $active := or (eq $.RelPermalink $url) (and (ne $url site.Home.RelPermalink) (hasPrefix $.RelPermalink $url)) }}
+      <li><a href="{{ $url }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+      {{- end }}
+    </ul>
+    <div class="nav-tools">
+      {{- with site.Params.editorial.github }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub（在新标签页打开）">GitHub <span aria-hidden="true">↗</span></a>{{ end }}
+      {{- if not site.Params.disableThemeToggle }}
+      <button id="theme-toggle" class="theme-toggle" accesskey="t" aria-label="切换明暗主题" title="切换明暗主题 (Alt + T)">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+      </button>
+      {{- end }}
+    </div>
+  </nav>
+</header>

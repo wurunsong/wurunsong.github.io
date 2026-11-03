@@ -1,0 +1,71 @@
+{{ define "main" }}
+{{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections -}}
+{{- $posts = where $posts "Params.hiddenInHomeList" "!=" true -}}
+{{- $paginator := .Paginate $posts.ByDate.Reverse -}}
+
+{{ if eq $paginator.PageNumber 1 }}
+<section class="journal-intro" aria-labelledby="journal-title">
+  <div>
+    <p class="intro-kicker">技术手记 / NOTES &amp; IDEAS</p>
+    <h1 class="intro-title" id="journal-title">把问题想清楚，<br><span>再把过程写下来。</span></h1>
+    <p class="intro-description">{{ site.Params.description }}</p>
+  </div>
+  <div class="intro-side" aria-hidden="true">
+    <span class="issue-label">LEARN · BUILD · WRITE</span>
+    <span class="intro-index">Aa<span>字里行间，皆有所得。</span></span>
+  </div>
+</section>
+{{ end }}
+
+<section class="journal-feed" aria-labelledby="latest-title">
+  <div class="section-heading">
+    <span class="section-label">THE JOURNAL</span>
+    <h2 id="latest-title">最近的记录</h2>
+    <span class="section-count">{{ len $posts }} 篇文章</span>
+  </div>
+  <div class="journal-grid">
+    <div class="journal-stories">
+      {{ range $index, $post := $paginator.Pages }}
+      <article class="story{{ if eq $index 0 }} story-lead{{ end }}">
+        <div class="story-meta">
+          <span class="story-category">{{ with .GetTerms "categories" }}{{ (index . 0).LinkTitle }}{{ else }}手记{{ end }}</span>
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
+          <span>{{ .ReadingTime }} 分钟阅读</span>
+        </div>
+        <h2 class="story-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p class="story-summary">{{ (.Description | default .Summary) | plainify | htmlUnescape | truncate 140 }}</p>
+        <div class="story-bottom">
+          <div class="story-tags">{{ range first 3 (.GetTerms "tags") }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</div>
+          <a class="story-read" href="{{ .RelPermalink }}" aria-label="阅读全文：{{ .Title }}">阅读全文 <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      {{ else }}
+      <p class="story-summary">第一篇手记，即将开始。</p>
+      {{ end }}
+    </div>
+    <aside class="journal-sidebar" aria-label="关于这份手记">
+      <div class="sidebar-note">
+        <p class="eyebrow">FROM THE EDITOR</p>
+        <h3>写下来，<br>是为了更好地理解。</h3>
+        <p>这里收纳学习中的疑问、实践中的发现，以及从问题走向答案的过程。</p>
+        <span class="editor-signature">{{ site.Params.author }}</span>
+      </div>
+      {{ with site.Taxonomies.tags }}
+      <div class="sidebar-section">
+        <p class="eyebrow">EXPLORE / 按主题阅读</p>
+        <div class="topic-list">
+          {{ range .Alphabetical }}<a href="{{ .Page.RelPermalink }}"><span>{{ .Page.LinkTitle }}</span><span class="topic-count">{{ printf "%02d" .Count }}</span></a>{{ end }}
+        </div>
+      </div>
+      {{ end }}
+      <div class="sidebar-footnote">慢慢学习，也慢慢积累。<br>{{ with site.Home.OutputFormats.Get "rss" }}<a href="{{ .RelPermalink }}">通过 RSS 订阅 <span aria-hidden="true">↗</span></a>{{ end }}</div>
+    </aside>
+  </div>
+</section>
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination" aria-label="文章分页">
+  {{ with $paginator.Prev }}<a class="prev" href="{{ .URL }}">← 上一页</a>{{ end }}
+  {{ with $paginator.Next }}<a class="next" href="{{ .URL }}">下一页 →</a>{{ end }}
+</nav>
+{{ end }}
+{{ end }}

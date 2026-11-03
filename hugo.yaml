@@ -1,20 +1,30 @@
 baseURL: "https://wurunsong.github.io/"
-title: "lilac的技术博客"
+title: "lilac 的技术手记"
 theme: "PaperMod"
 
 defaultContentLanguage: "zh"
 locale: "zh-CN"
 hasCJKLanguage: true
 timeZone: "Asia/Shanghai"
+summaryLength: 90
 
 params:
   description: "记录编程学习、项目实践和解决问题的过程。"
   author: "lilac"
   mainSections: ["posts"]
-  defaultTheme: "auto"
+  defaultTheme: "light"
+  DateFormat: "2006.01.02"
   ShowReadingTime: true
   ShowCodeCopyButtons: true
   ShowToc: true
+  ShowBreadCrumbs: true
+  ShowPostNavLinks: true
+  disableSpecial1stPost: true
+  editorial:
+    brand: "lilac."
+    github: "https://github.com/wurunsong"
+  footer:
+    text: "保持好奇，认真记录。"
 
 markup:
   highlight:
@@ -22,7 +32,10 @@ markup:
 
 menus:
   main:
-    - name: "文章"
+    - name: "首页"
+      url: "/"
+      weight: 5
+    - name: "全部文章"
       url: "/posts/"
       weight: 10
     - name: "标签"
